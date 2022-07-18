@@ -1,6 +1,6 @@
 import TRANSACTION_TYPE from './Constants/TransactionType.js';
-import CashInCommision from './Calculator/cash-in.js';
-import CashOutCommision from './Calculator/cash-out.js';
+import CashInCommision from './Commission/cash-in.js';
+import CashOutCommision from './Commission/cash-out.js';
 
 // Read JSON file from arguments
 import {

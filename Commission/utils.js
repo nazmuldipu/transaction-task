@@ -1,4 +1,4 @@
-import User from "../Model/User.js";
+import User from "../Models/User.js";
 
 const roundedCurrency = (value, decimalPlaces = 2) => {
     if (!value) {
@@ -18,32 +18,6 @@ const calculateWeek = (dateString) => {
     let numberOfDays = Math.floor((currentdate - oneJan) / (24 * 60 * 60 * 1000));
     return Math.ceil((currentdate.getDay() + 1 + numberOfDays) / 7);
 };
-
-const setTransaction = (transactionTable, week, amount) => {
-    if (transactionTable[week]) {
-        transactionTable[week].amount += amount;
-    } else {
-        transactionTable[week] = {
-            week,
-            amount
-        };
-    }
-}
-
-const getTransaction = (transactionTable, week) => {
-    if (transactionTable[week]) {
-        return transactionTable[week].amount;
-    }
-    return 0;
-}
-
-const isMaxLimitExceed = (transactionTable, week, limit) => {
-    if (transactionTable[week]) {
-        const result = transactionTable[week].amount >= limit;
-        return result;
-    }
-    return false;
-}
 
 const getUser = (users = [], id = 0) => {
     if (users[id] !== null && users[id] !== undefined) {
