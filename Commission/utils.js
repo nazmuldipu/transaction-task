@@ -2,8 +2,9 @@ import User from "../Models/User.js";
 
 const roundedCurrency = (value, decimalPlaces = 2) => {
     if (!value) {
-        return 0;
+        return value.toFixed(decimalPlaces);
     }
+    
     return Number(`${Math.ceil(`${value}e${decimalPlaces}`)}e-${decimalPlaces}`).toFixed(decimalPlaces);
 };
 
@@ -23,7 +24,7 @@ const getUser = (users = [], id = 0) => {
     if (users[id] !== null && users[id] !== undefined) {
         return users[id];
     }
-    
+
     users[id] = new User(id);
     return users[id];
 };

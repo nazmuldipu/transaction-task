@@ -38,6 +38,7 @@ const getNaturalCommission = (users, transaction) => {
     if (amoutTocalculate > 0) {
         res = amoutTocalculate * COMMISSION_TYPE.percents / PERCENTAGE_MAX;
     }
+    
     return roundedCurrency(res, CURRENCY.EUR.SMALLEST_CURRENCY_DECIMAL);
 }
 
