@@ -2,7 +2,7 @@ import {
     roundedCurrency,
     calculateWeek,
     getUser
-} from '../../../Commission/utils.js';
+} from '../../../../lib/utils/utils.js';
 
 describe('Commission Utils', () => {
     describe('roundedCurrency', () => {

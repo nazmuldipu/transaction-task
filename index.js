@@ -1,41 +1,29 @@
-import TRANSACTION_TYPE from './Constants/TransactionType.js';
-import CashInCommision from './Commission/cash-in.js';
-import CashOutCommision from './Commission/cash-out.js';
+import CommissionCalulator from './lib/commission/commission-calculator.js';
 
 // Read JSON file from arguments
 import {
     readFileSync
 } from 'fs';
-const file = process.argv[2];
-const data = readFileSync(file, 'utf8');
 
 
 try {
+    // import data from input arguments
+    const file = process.argv[2];
+    if (!file) throw new Error('No file provided');
+    const data = readFileSync(file, 'utf8');
+
     // Data validation
     const transactions = JSON.parse(data);
     if (!Array.isArray(transactions)) throw new Error('Invalid Input Data');
+    
     const users = [];
 
-    // Calculate commission for each transaction
+    // Loop through transactions and calculate commission
     for (let i = 0; i < transactions.length; i++) {
         const transaction = transactions[i];
-        const { type } = transaction;
-
-        switch (type) {
-            case TRANSACTION_TYPE.CASH_IN:
-                console.log(CashInCommision(transaction));
-                break;
-            case TRANSACTION_TYPE.CASH_OUT:
-                console.log( CashOutCommision(users, transaction));
-                break;
-            default:
-                console.log(`${type} is a invalid transaction type`);
-                break;
-        }
-        // const commission = calculateCommission(transaction);
-        // console.log(`${transaction.id} ${commission}`);
+        console.log(CommissionCalulator(users, transaction));
     }
 
 } catch (err) {
-    console.log(err);
+    console.log('Error:', err['message']);
 }
