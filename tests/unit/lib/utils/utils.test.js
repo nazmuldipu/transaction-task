@@ -1,6 +1,6 @@
 import {
     roundedCurrency,
-    calculateWeek,
+    calculateYearWeek,
     getUser
 } from '../../../../lib/utils/utils.js';
 
@@ -25,18 +25,18 @@ describe('Commission Utils', () => {
             expect(resp).toBe('0.2');
         });
     });
-    describe('calculateWeek', () => {
+    describe('calculateYearWeek', () => {
         it('should retun -1 when given null', () => {
-            const result = calculateWeek(null);
+            const result = calculateYearWeek(null);
             expect(result).toBe(-1);
         });
         it('should return 1 when given "2018-01-01"', () => {
-            const result = calculateWeek('2018-01-01');
-            expect(result).toBe(1);
+            const result = calculateYearWeek('2018-01-01');
+            expect(result).toBe("2018_1");
         });
         it('should return 23 when given "2018-06-01"', () => {
-            const result = calculateWeek('2018-06-01');
-            expect(result).toBe(23);
+            const result = calculateYearWeek('2018-06-01');
+            expect(result).toBe("2018_22");
         });
 
     });
@@ -58,11 +58,14 @@ describe('Commission Utils', () => {
 
         it('Should return exiting user', () => {
             const array = [];
-            array[3] = { id: 3, weekTransaction: ['week'] };
+            array[3] = {
+                id: 3,
+                weekTransaction: ['week']
+            };
             const resp = getUser(array, 3);
             expect(typeof resp).toBe('object');
             expect(resp).toHaveProperty('id', 3);
             expect(resp).toHaveProperty('weekTransaction', ['week']);
-          });
+        });
     });
 });
