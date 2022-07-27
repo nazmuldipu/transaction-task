@@ -119,6 +119,67 @@ npm start ./data.json
 ]
 ```
 
+## API Call
+Two REST API Defined in this task. 
+
+1) Calculated Commition from Transaction array.
+```http
+POST /api/commissions
+```
+
+Sample request body in ``json`` format
+
+```javascript
+[
+    {
+        "date": "2022-07-19",
+        "user_id": 1,
+        "user_type": "natural",
+        "type": "cash_out",
+        "operation": {
+            "amount": 500.00,
+            "currency": "EUR"
+        }
+    },
+    {
+        "date": "2022-07-20",
+        "user_id": 1,
+        "user_type": "natural",
+        "type": "cash_out",
+        "operation": {
+            "amount": 600.00,
+            "currency": "EUR"
+        }
+    },
+    {
+        "date": "2022-07-21",
+        "user_id": 1,
+        "user_type": "natural",
+        "type": "cash_out",
+        "operation": {
+            "amount": 100.00,
+            "currency": "EUR"
+        }
+    }
+]
+```
+
+Sample Respose 
+```javascript
+[
+    "0.00",
+    "0.30",
+    "0.30"
+]
+```
+
+2) Clear User Data to reset and start again
+```http
+POST /clear
+```
+This API will clear all previous data and start calculation again
+
+
 ## Test the application
 
 In this application few unit test written using ``Jest`` to test the functinality of code/module. To run the tests, you can simply execute the following command: 

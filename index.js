@@ -1,9 +1,12 @@
 import CommissionCalulator from './lib/commission/commission-calculator.js';
-
 // Read JSON file from arguments
 import {
     readFileSync
 } from 'fs';
+import express from 'express';
+import routes from "./lib/routes.js";
+
+let users = [];
 
 
 try {
@@ -15,8 +18,6 @@ try {
     // Data validation
     const transactions = JSON.parse(data);
     if (!Array.isArray(transactions)) throw new Error('Invalid Input Data');
-    
-    const users = [];
 
     // Loop through transactions and calculate commission
     for (let i = 0; i < transactions.length; i++) {
@@ -25,5 +26,19 @@ try {
     }
 
 } catch (err) {
-    console.log('Error:', err['message']);
+    console.log(err['message']);
 }
+
+//clear users for API Call
+users = [];
+
+// Define API here
+const port = process.env.PORT || 3000;
+const app = express();
+routes(app, users);
+
+const server = app.listen(port, () => {
+    console.log(`Listening on port ${port}...`);
+});
+
+export default server;
